@@ -10,3 +10,4 @@ git push -u origin main
 git remote add origin https://github.com/galvisjuanc/marketSpring.git
 git branch -M main
 git push -u origin main
+…or create a new repository on the command line
