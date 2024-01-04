@@ -6,6 +6,8 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 
 import java.time.LocalDateTime;
 
@@ -29,6 +31,10 @@ public class Compra {
     private String comentario;
 
     private String estado;
+
+    @ManyToOne
+    @JoinColumn(name = "id_cliente", insertable = false, updatable = false)
+    private Cliente cliente;
 
     public Integer getIdCompra() {
         return idCompra;
