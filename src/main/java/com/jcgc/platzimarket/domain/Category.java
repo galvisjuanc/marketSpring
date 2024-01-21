@@ -1,16 +1,16 @@
 package com.jcgc.platzimarket.domain;
 
 public class Category {
-    private int id;
+    private int categoryId;
     private String category;
     private boolean active;
 
-    public int getId() {
-        return id;
+    public int getCategoryId() {
+        return categoryId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setCategoryId(int categoryId) {
+        this.categoryId = categoryId;
     }
 
     public String getCategory() {
