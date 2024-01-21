@@ -4,6 +4,7 @@ import com.jcgc.platzimarket.persistence.crud.ProductoCrudRepository;
 import com.jcgc.platzimarket.persistence.entity.Producto;
 
 import java.util.List;
+import java.util.Optional;
 
 public class ProductoRepository {
 
@@ -15,5 +16,9 @@ public class ProductoRepository {
 
     public List<Producto> getByCategoria(int idCategoria) {
         return productoCrudRepository.findByIdCategoriaOrderByNombreAsc(idCategoria);
+    }
+
+    public Optional<List<Producto>> getEscasos(int cantidad) {
+        return productoCrudRepository.findByCantidadStockLessThanAndEstado(cantidad, true);
     }
 }
