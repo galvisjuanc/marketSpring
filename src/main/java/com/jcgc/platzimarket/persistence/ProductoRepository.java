@@ -35,4 +35,18 @@ public class ProductoRepository {
     public void delete(int idProducto) {
         productoCrudRepository.deleteById(idProducto);
     }
+
+    public Producto update(Producto newProducto, int idProducto) {
+        return productoCrudRepository.findById(idProducto)
+                .map(producto -> {
+                            producto.setCantidadStock(newProducto.getCantidadStock());
+                            producto.setIdCategoria(newProducto.getIdCategoria());
+                            producto.setEstado(newProducto.getEstado());
+                            producto.setNombre(newProducto.getNombre());
+                            producto.setCodigoBarras(newProducto.getCodigoBarras());
+                            producto.setPrecioVenta(newProducto.getPrecioVenta());
+                            return productoCrudRepository.save(producto);
+                        }
+                ).get();
+    }
 }
