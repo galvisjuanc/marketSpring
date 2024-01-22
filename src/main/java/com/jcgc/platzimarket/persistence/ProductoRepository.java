@@ -5,6 +5,7 @@ import com.jcgc.platzimarket.domain.repository.ProductRepository;
 import com.jcgc.platzimarket.persistence.crud.ProductoCrudRepository;
 import com.jcgc.platzimarket.persistence.entity.Producto;
 import com.jcgc.platzimarket.persistence.mapper.ProductMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import javax.swing.text.html.Option;
@@ -14,7 +15,10 @@ import java.util.Optional;
 @Repository
 public class ProductoRepository implements ProductRepository {
 
+    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+
+    @Autowired
     private ProductMapper mapper;
 
     @Override
