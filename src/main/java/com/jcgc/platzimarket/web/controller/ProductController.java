@@ -28,5 +28,9 @@ public class ProductController {
         return productService.getByCategory(categoryId);
     }
 
+    public Product save(Product product) {
+        return productService.save(product);
+    }
+
 
 }
