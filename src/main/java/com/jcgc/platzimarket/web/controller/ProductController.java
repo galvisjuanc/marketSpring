@@ -32,5 +32,8 @@ public class ProductController {
         return productService.save(product);
     }
 
+    public boolean delete (int productId) {
+        return productService.delete(productId);
+    }
 
 }
