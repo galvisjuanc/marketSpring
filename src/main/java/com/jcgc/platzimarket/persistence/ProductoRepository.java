@@ -8,18 +8,19 @@ import com.jcgc.platzimarket.persistence.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
-
-    @Autowired
     private ProductoCrudRepository productoCrudRepository;
+    private ProductMapper mapper;
 
     @Autowired
-    private ProductMapper mapper;
+    public ProductoRepository(ProductoCrudRepository productoCrudRepository, ProductMapper mapper) {
+        this.productoCrudRepository = productoCrudRepository;
+        this.mapper = mapper;
+    }
 
     @Override
     public List<Product> getAll(){
@@ -45,6 +46,7 @@ public class ProductoRepository implements ProductRepository {
         return productoCrudRepository.findById(productId).map(prods -> mapper.toProduct(prods));
     }
 
+    @Override
     public Product save(Product product) {
         Producto producto = mapper.toProducto(product);
         return mapper.toProduct(productoCrudRepository.save(producto));
@@ -53,19 +55,5 @@ public class ProductoRepository implements ProductRepository {
     @Override
     public void delete(int productId) {
         productoCrudRepository.deleteById(productId);
-    }
-
-    public Producto update(Producto newProducto, int idProducto) {
-        return productoCrudRepository.findById(idProducto)
-                .map(producto -> {
-                            producto.setCantidadStock(newProducto.getCantidadStock());
-                            producto.setIdCategoria(newProducto.getIdCategoria());
-                            producto.setEstado(newProducto.getEstado());
-                            producto.setNombre(newProducto.getNombre());
-                            producto.setCodigoBarras(newProducto.getCodigoBarras());
-                            producto.setPrecioVenta(newProducto.getPrecioVenta());
-                            return productoCrudRepository.save(producto);
-                        }
-                ).get();
     }
 }

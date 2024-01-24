@@ -2,7 +2,7 @@ package com.jcgc.platzimarket.domain;
 
 public class Product {
 
-    private int Id;
+    private int productId;
     private String name;
     private int categoryId;
     private double price;
@@ -10,12 +10,12 @@ public class Product {
     private boolean active;
     private Category category;
 
-    public int getId() {
-        return Id;
+    public int getProductId() {
+        return productId;
     }
 
-    public void setId(int id) {
-        Id = id;
+    public void setProductId(int productId) {
+        this.productId = productId;
     }
 
     public String getName() {
