@@ -1,4 +1,4 @@
-package com.jcgc.platzimarket.persistence;
+package com.jcgc.platzimarket.persistence.repository;
 
 import com.jcgc.platzimarket.domain.Product;
 import com.jcgc.platzimarket.domain.repository.ProductRepository;
@@ -13,20 +13,17 @@ import java.util.Optional;
 
 @Repository
 public class ProductoRepository implements ProductRepository {
-    private ProductoCrudRepository productoCrudRepository;
-    private ProductMapper mapper;
 
     @Autowired
-    public ProductoRepository(ProductoCrudRepository productoCrudRepository, ProductMapper mapper) {
-        this.productoCrudRepository = productoCrudRepository;
-        this.mapper = mapper;
-    }
+    private ProductoCrudRepository productoCrudRepository;
+
+    @Autowired
+    private ProductMapper mapper;
 
     @Override
-    public List<Product> getAll(){
+    public List<Product> getAll() {
         List<Producto> productos = (List<Producto>) productoCrudRepository.findAll();
         return mapper.toProducts(productos);
-
     }
 
     @Override
@@ -43,7 +40,7 @@ public class ProductoRepository implements ProductRepository {
 
     @Override
     public Optional<Product> getProduct(int productId) {
-        return productoCrudRepository.findById(productId).map(prods -> mapper.toProduct(prods));
+        return productoCrudRepository.findById(productId).map(producto -> mapper.toProduct(producto));
     }
 
     @Override
