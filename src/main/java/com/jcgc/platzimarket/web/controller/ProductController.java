@@ -3,6 +3,8 @@ package com.jcgc.platzimarket.web.controller;
 import com.jcgc.platzimarket.domain.Product;
 import com.jcgc.platzimarket.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +18,8 @@ public class ProductController {
     private ProductService productService;
 
     @GetMapping("/all")
-    public List<Product> getAll() {
-        return productService.getAll();
+    public ResponseEntity<List<Product>> getAll() {
+        return new ResponseEntity<>(productService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
