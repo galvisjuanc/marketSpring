@@ -39,7 +39,11 @@ public class ProductController {
     }
 
     @GetMapping("/category/{categoryId}")
-    public  ResponseEntity<List<Product>> getByCategory(@PathVariable("categoryId") int categoryId) {
+    @Operation(summary = "Search a category with an ID")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "category not found")
+    public  ResponseEntity<List<Product>> getByCategory(@Parameter(description = "The ID of the category", required = true, example = "1")
+                                                            @PathVariable("categoryId") int categoryId) {
         return productService.getByCategory(categoryId)
                 .map(products -> new ResponseEntity<>(products, HttpStatus.OK))
                 .orElse(new ResponseEntity<>(HttpStatus.NOT_FOUND));
