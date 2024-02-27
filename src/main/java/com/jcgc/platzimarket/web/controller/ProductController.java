@@ -49,7 +49,25 @@ public class ProductController {
     }
 
     @PostMapping("/save")
-    public ResponseEntity<Product> save(@RequestBody Product product) {
+    @Operation(summary = "Save a product inside the DB")
+    @ApiResponse(responseCode = "201", description = "Product created")
+    public ResponseEntity<Product> save(@Parameter(description = "The product json", required = true,
+            example = """
+                    {
+                      "productId": 0,
+                      "name": "string",
+                      "categoryId": 0,
+                      "price": 0,
+                      "stock": 0,
+                      "active": true,
+                      "category": {
+                        "categoryId": 0,
+                        "category": "string",
+                        "active": true
+                      }
+                    }
+                    """)
+                                            @RequestBody Product product) {
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
