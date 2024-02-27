@@ -55,14 +55,14 @@ public class ProductController {
             example = """
                     {
                       "productId": 0,
-                      "name": "string",
+                      "name": "string product name",
                       "categoryId": 0,
                       "price": 0,
                       "stock": 0,
                       "active": true,
                       "category": {
                         "categoryId": 0,
-                        "category": "string",
+                        "category": "string product category",
                         "active": true
                       }
                     }
@@ -71,8 +71,12 @@ public class ProductController {
         return new ResponseEntity<>(productService.save(product), HttpStatus.CREATED);
     }
 
+    @Operation(summary = "Delete a product with an ID")
+    @ApiResponse(responseCode = "200", description = "OK")
+    @ApiResponse(responseCode = "404", description = "product not found")
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<Boolean> delete (@PathVariable("id") int productId) {
+    public ResponseEntity<Boolean> delete (@Parameter(description = "The ID of the product", required = true, example = "1")
+                                               @PathVariable("id") int productId) {
         return productService.delete(productId) ? new ResponseEntity<>(HttpStatus.OK) : new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
 
